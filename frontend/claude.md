@@ -2,95 +2,133 @@
 
 ## Overview
 
-This document defines the UI/UX standards for the Merge application. All components must follow these guidelines to ensure consistency and maintainability.
+This document defines the non-negotiable UI/UX rules for the Merge application.
 
-**Design Philosophy**: Modern, sleek, blue-themed interface with clean lines, subtle gradients, and smooth interactions.
+Merge is a futuristic, dark-first, typography-led product built for serious developers.
+The interface must feel calm, precise, modern, and intentional.
+
+If something looks "pretty" before it looks "clear", it is wrong.
 
 ---
 
-## Color Palette
+## Design Philosophy
 
-### Primary Blue Theme
+### Core Direction
 
-- **Primary Blue**: `bg-blue-600` (#3b82f6) - Main brand color, buttons, links
-- **Primary Hover**: `bg-blue-700` (#2563eb) - Hover states for buttons
-- **Primary Light**: `bg-blue-50` (#eff6ff) - Backgrounds, subtle highlights
-- **Primary Text**: `text-blue-600` - Links and emphasized text
+Futuristic, dark-first, typography-led product for serious developers.
 
-### Background Colors
+### Design Principles
 
-- **White**: `bg-white` (#ffffff) - Cards, navbar, footer
-- **Light Gray**: `bg-gray-50` - Page backgrounds
-- **Gradient**: `bg-gradient-to-br from-blue-50 via-white to-indigo-50` - Auth pages
+- Dark UI by default
+- Flat surfaces, no visual gimmicks
+- Typography over color and effects
+- Minimal but deliberate hierarchy
+- UI should disappear, content should stand out
+
+### Explicitly Not Allowed
+
+- Glassmorphism
+- DaisyUI components (except dropdowns)
+- Bright colors as primary UI
+- Rounded, bubbly cards
+- Marketing-style visuals
+
+### Allowed with Purpose
+
+- Subtle gradients for depth and premium feel (backgrounds, overlays, glow effects)
+- Refined shadows for elevation (shadow-lg, shadow-2xl with low opacity)
+- Border radius up to 16px for featured content cards
+
+---
+
+## Color System
+
+### Backgrounds
+
+- App Background: `#0B0F14`
+- Surface / Card: `#121826`
+- Elevated Surface: `#161C2C`
+
+### Borders & Dividers
+
+- Default Border: `rgba(255,255,255,0.06)`
+- Subtle Divider: `rgba(255,255,255,0.04)`
 
 ### Text Colors
 
-- **Primary Text**: `text-gray-900` (#111827) - Headings
-- **Secondary Text**: `text-gray-600` (#4b5563) - Body text
-- **Muted Text**: `text-gray-500` (#6b7280) - Helper text
+- Primary Text: `#E5E7EB`
+- Secondary Text: `#9CA3AF`
+- Muted Text: `#6B7280`
+- Disabled Text: `#4B5563`
 
-### Border Colors
+### Accent Colors
 
-- **Default Border**: `border-gray-300` - Input fields, cards
-- **Light Border**: `border-gray-200` - Dividers, separators
-- **Focus Border**: `border-blue-500` - Focused inputs
+- Primary Accent: `#4F46E5` (Indigo 600)
+- Secondary Accent: `#9333EA` (Purple 600)
 
-### Semantic Colors
+Rules:
 
-- **Success**: `bg-green-500` (#10b981)
-- **Warning**: `bg-yellow-500` (#f59e0b)
-- **Error**: `bg-red-500` (#ef4444)
-- **Info**: `bg-blue-500` (#3b82f6)
+- Primary accent for CTAs and focus states
+- Secondary accent for gradients and hover effects
+- Purple used sparingly to complement indigo in premium UI elements
+- Gradients: `from-indigo-600 to-indigo-500` or `from-indigo-600 via-purple-600 to-indigo-600`
 
 ---
 
 ## Typography
 
+Typography is the primary design tool.
+
 ### Font Family
 
-- **Primary**: System font stack (Tailwind default)
-- **Fallback**: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`
+- Primary: Inter
+- Fallback: system-ui, sans-serif
 
-### Font Sizes
+### Base Settings
 
-- **Headings**:
-  - H1: `text-4xl` (36px) - Page titles
-  - H2: `text-3xl` (30px) - Section titles
-  - H3: `text-2xl` (24px) - Subsection titles
-  - H4: `text-xl` (20px) - Card titles
+- Base font size: 15px
+- Line height: 1.6
+- No ALL CAPS
+- No artificial letter spacing
 
-- **Body**:
-  - Large: `text-lg` (18px) - Important text
-  - Base: `text-base` (16px) - Default text
-  - Small: `text-sm` (14px) - Helper text, captions
-  - Extra Small: `text-xs` (12px) - Labels, metadata
+### Headings
 
-### Font Weights
+- H1: `text-2xl font-semibold`
+- H2: `text-xl font-semibold`
+- H3: `text-lg font-medium`
+- H4: `text-base font-medium`
 
-- **Bold**: `font-bold` (700) - Headings, emphasis
-- **Semibold**: `font-semibold` (600) - Subheadings
-- **Medium**: `font-medium` (500) - Button text
-- **Normal**: `font-normal` (400) - Body text
+Rules:
+
+- Do not use bold (700+)
+- Use weight, not size, for hierarchy
+- Headings should feel calm and confident
+
+### Body Text
+
+- Base: `text-sm text-gray-300`
+- Secondary: `text-sm text-gray-400`
+- Muted: `text-xs text-gray-500`
 
 ---
 
 ## Spacing System
 
-### Padding/Margin Scale (Tailwind scale)
+Allowed spacing values only:
 
-- **xs**: `2` (8px)
-- **sm**: `4` (16px)
-- **md**: `6` (24px)
-- **lg**: `8` (32px)
-- **xl**: `12` (48px)
-- **2xl**: `16` (64px)
+- 4
+- 8
+- 12
+- 16
+- 24
+- 32
+- 48
 
-### Common Patterns
+Rules:
 
-- **Page padding**: `px-4 md:px-8 lg:px-16`
-- **Section spacing**: `py-12 md:py-16`
-- **Card padding**: `p-6 md:p-8`
-- **Component gaps**: `gap-4` or `gap-6`
+- No arbitrary spacing values
+- Increase whitespace before adding borders or dividers
+- Reduce padding before adding visual elements
 
 ---
 
@@ -98,512 +136,163 @@ This document defines the UI/UX standards for the Merge application. All compone
 
 ### Buttons
 
-**Primary Button (Blue)**
+#### Primary Button
 
 ```jsx
-<button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-	Click Me
+<button className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-md transition">
+	Action
 </button>
 ```
 
-**Primary Button with Loading**
+Rules:
+
+- Max border radius: 6px
+- No shadows
+- No gradients
+- Compact padding
+
+#### Secondary Button
 
 ```jsx
-<button
-	disabled={isLoading}
-	className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
-	{isLoading ? (
-		<>
-			<span className="loading loading-spinner loading-sm"></span>
-			Loading...
-		</>
-	) : (
-		"Click Me"
-	)}
+<button className="border border-white/10 text-gray-300 hover:text-white hover:border-white/20 text-sm px-4 py-2 rounded-md transition">
+	Action
 </button>
 ```
 
-**Secondary Button (Outline)**
+#### Destructive Button
 
 ```jsx
-<button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition duration-200">
-	Click Me
-</button>
+<button className="text-red-400 hover:text-red-300 text-sm px-4 py-2">Delete</button>
 ```
 
-**Danger Button**
+### Inputs & Forms
 
 ```jsx
-<button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
-	Delete
-</button>
+<input
+	className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
+	placeholder="Enter value"
+/>
 ```
 
-**Button Sizes**
+Rules:
 
-- Small: `py-2 px-4 text-sm`
-- Medium: `py-3 px-6` (default)
-- Large: `py-4 px-8 text-lg`
-
-**Button States**
-
-- Disabled: `disabled:opacity-50 disabled:cursor-not-allowed`
-- Loading: Use DaisyUI spinner `<span className="loading loading-spinner loading-sm"></span>`
-
----
-
-### Form Elements
-
-**Input Fields**
-
-```jsx
-<div className="w-full">
-	<label
-		className="block text-sm font-medium text-gray-700 mb-2"
-		htmlFor="email">
-		Email
-	</label>
-	<input
-		type="email"
-		id="email"
-		placeholder="Enter your email"
-		className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-	/>
-</div>
-```
-
-**Input with Error**
-
-```jsx
-<div className="w-full">
-	<label
-		className="block text-sm font-medium text-gray-700 mb-2"
-		htmlFor="email">
-		Email
-	</label>
-	<input
-		type="email"
-		className="w-full px-4 py-3 border border-red-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-	/>
-	<p className="mt-1 text-sm text-red-600">Please enter a valid email</p>
-</div>
-```
-
-**Textarea**
-
-```jsx
-<textarea
-	className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
-	rows="4"
-	placeholder="Enter your bio..."></textarea>
-```
-
-**Select/Dropdown**
-
-```jsx
-<select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
-	<option value="">Select an option</option>
-	<option value="1">Option 1</option>
-	<option value="2">Option 2</option>
-</select>
-```
-
----
+- Transparent backgrounds
+- No filled inputs
+- Focus is indicated only via border color
+- No focus rings
 
 ### Cards
 
-**Basic Card**
+#### Standard Card
 
 ```jsx
-<div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
-	<h2 className="text-xl font-bold text-gray-900 mb-2">Card Title</h2>
-	<p className="text-gray-600 mb-4">Card content goes here</p>
-	<div className="flex justify-end">
-		<button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-			Action
-		</button>
+<div className="bg-[#121826] border border-white/10 rounded-lg p-4">
+	<h3 className="text-sm font-medium text-gray-200 mb-1">Title</h3>
+	<p className="text-sm text-gray-400">Content</p>
+</div>
+```
+
+Rules:
+- Flat surfaces
+- Subtle borders
+- Small radius (8px max)
+- No shadows
+
+#### Featured Card (UserCard, Premium Content)
+
+```jsx
+<div className="relative group">
+	<div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 rounded-2xl opacity-20 group-hover:opacity-30 blur transition duration-500"></div>
+	<div className="relative bg-[#0D1117] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+		{/* Content */}
 	</div>
 </div>
 ```
 
-**Card with Image**
+Rules:
+- Glow effect with gradient blur on outer wrapper
+- Deeper shadows for elevation (shadow-2xl)
+- Larger radius (16px max)
+- Gradient overlays on images for legibility
+- Hover states with subtle animations
+
+---
+
+## Layout
+
+### App Layout
+
+- Dark background always visible
+- Content constrained (max-w-6xl)
+- Generous vertical spacing
+- No boxed layouts
 
 ```jsx
-<div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-	<img
-		src="/image.jpg"
-		alt="Description"
-		className="w-full h-48 object-cover"
-	/>
-	<div className="p-6">
-		<h2 className="text-xl font-bold text-gray-900 mb-2">Card Title</h2>
-		<p className="text-gray-600">Card content</p>
-	</div>
+<div className="min-h-screen bg-[#0B0F14] text-gray-200">
+	<main className="max-w-6xl mx-auto px-4 py-8">
+		{/* content */}
+	</main>
 </div>
 ```
 
----
+### Interaction & Motion
 
-### Layout Containers
-
-**Full Page with Gradient Background (Auth Pages)**
-
-```jsx
-<div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4 py-12">
-	{/* Page content */}
-</div>
-```
-
-**Main Content Container**
-
-```jsx
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-	{/* Content */}
-</div>
-```
-
-**Centered Auth Card**
-
-```jsx
-<div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-	{/* Form content */}
-</div>
-```
-
-**Grid Layouts**
-
-```jsx
-{
-	/* 2 columns */
-}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-6">{/* Items */}</div>;
-
-{
-	/* 3 columns */
-}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-	{/* Items */}
-</div>;
-
-{
-	/* 4 columns */
-}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-	{/* Items */}
-</div>;
-```
+- Transition duration: 200–500ms for premium components, 150–200ms for standard
+- Ease-in-out only
+- No spring animations
+- Hover states should feel responsive and premium
+- Use group hover patterns for nested interactive elements
+- Subtle glow/shadow transitions on featured content
 
 ---
 
-### Modals
+## Accessibility
 
-```jsx
-{
-	/* Modal trigger */
-}
-<button
-	className="btn"
-	onClick={() => document.getElementById("my_modal").showModal()}>
-	Open Modal
-</button>;
-
-{
-	/* Modal */
-}
-<dialog id="my_modal" className="modal">
-	<div className="modal-box">
-		<h3 className="font-bold text-lg">Modal Title</h3>
-		<p className="py-4">Modal content</p>
-		<div className="modal-action">
-			<form method="dialog">
-				<button className="btn">Close</button>
-			</form>
-		</div>
-	</div>
-</dialog>;
-```
+- Contrast must meet WCAG AA
+- Keyboard navigation required
+- Focus states must be visible (border-based)
+- Semantic HTML only
 
 ---
 
-### Alerts/Notifications
+## Design Checklist (Before Shipping)
 
-```jsx
-{
-	/* Info Alert */
-}
-<div className="alert alert-info">
-	<span>Info message</span>
-</div>;
-
-{
-	/* Success Alert */
-}
-<div className="alert alert-success">
-	<span>Success message</span>
-</div>;
-
-{
-	/* Warning Alert */
-}
-<div className="alert alert-warning">
-	<span>Warning message</span>
-</div>;
-
-{
-	/* Error Alert */
-}
-<div className="alert alert-error">
-	<span>Error message</span>
-</div>;
-```
+- Gradients used purposefully (not decorative)
+- Accent colors limited to indigo/purple spectrum
+- Typography carries primary hierarchy
+- Spacing feels intentional
+- Premium components feel elevated, not loud
+- Standard components remain minimal and functional
+- Hover states provide clear feedback
 
 ---
 
-### Loading States
+## Summary
 
-**Spinner**
+Merge UI should feel:
 
-```jsx
-<span className="loading loading-spinner loading-lg"></span>
-```
+- Serious yet engaging
+- Calm with moments of visual interest
+- Modern and premium
+- Developer-native with social polish
 
-**Skeleton**
+### Component Tiers
 
-```jsx
-<div className="skeleton h-32 w-full"></div>
-```
+**Standard Components** (Auth, Forms, Settings):
+- Minimal, flat, typography-led
+- Subtle borders and spacing
+- Functional over decorative
 
----
+**Featured Components** (Feed, UserCard, Hero sections):
+- Elevated with depth and glow
+- Gradient accents for premium feel
+- Engaging hover states and micro-interactions
+- Cinematic presentation
 
-## Design Principles
-
-### 1. Consistency
-
-- Use DaisyUI components consistently across all pages
-- Follow the established color palette
-- Maintain consistent spacing and sizing
-
-### 2. Responsiveness
-
-- Mobile-first approach
-- Use Tailwind's responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`
-- Test on multiple screen sizes
-
-### 3. Accessibility
-
-- Use semantic HTML elements
-- Include proper ARIA labels
-- Ensure sufficient color contrast
-- Keyboard navigation support
-
-### 4. Visual Hierarchy
-
-- Clear heading structure (H1 → H2 → H3)
-- Use whitespace effectively
-- Emphasize primary actions with primary button color
-
-### 5. User Feedback
-
-- Show loading states during async operations
-- Display success/error messages
-- Use hover states on interactive elements
-- Provide clear validation messages
-
----
-
-## Common Patterns
-
-### Authentication Pages (Login/Signup)
-
-```jsx
-<div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4 py-12">
-	<div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-		<div className="text-center mb-8">
-			<h1 className="text-4xl font-bold text-blue-600 mb-2">Merge</h1>
-			<p className="text-gray-600">Tagline here</p>
-		</div>
-		{/* Form here */}
-	</div>
-</div>
-```
-
-### Navbar
-
-```jsx
-<nav className="bg-white border-b border-gray-200 shadow-sm">
-	<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div className="flex justify-between items-center h-16">
-			<a href="/" className="text-2xl font-bold text-blue-600">
-				Merge
-			</a>
-			{/* Nav items */}
-		</div>
-	</div>
-</nav>
-```
-
-### Footer
-
-```jsx
-<footer className="bg-white border-t border-gray-200 mt-auto">
-	<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-		{/* Footer content */}
-	</div>
-</footer>
-```
-
-### Dashboard/Feed Pages
-
-- White background with subtle shadows
-- Grid layout with responsive columns
-- Card-based content with rounded corners
-- Blue accent colors for CTAs
-
-### Forms
-
-- Label above input: `text-sm font-medium text-gray-700 mb-2`
-- Input styles: `px-4 py-3 border border-gray-300 rounded-lg`
-- Focus ring: `focus:ring-2 focus:ring-blue-500`
-- Show validation inline with red text
-- Disable submit button during loading
-- Use loading spinner from DaisyUI
-
----
-
-## CSS Framework Usage
-
-**Primary: Tailwind CSS Utility Classes**
-
-- Use Tailwind utility classes for all styling
-- Blue theme: `bg-blue-600`, `text-blue-600`, `hover:bg-blue-700`
-- Spacing: Tailwind scale (`px-4`, `py-3`, `gap-6`, etc.)
-- Responsive: Mobile-first with `sm:`, `md:`, `lg:`, `xl:` prefixes
-
-**DaisyUI Components (Limited Use)**
-
-- Only use for: dropdown menus, loading spinner
-- Dropdown: `dropdown dropdown-end` with `menu dropdown-content`
-- Loading: `<span className="loading loading-spinner loading-sm"></span>`
-- Badge: `badge badge-sm` with custom colors
-
-**Avoid**
-
-- Don't use `btn`, `input`, `card`, `form-control` classes from DaisyUI
-- Use Tailwind utilities instead for consistency
-
----
-
-## File Organization
-
-```
-src/
-├── components/
-│   ├── Login.jsx
-│   ├── Signup.jsx
-│   ├── Navbar.jsx
-│   ├── Footer.jsx
-│   └── ...
-├── styles/
-│   └── index.css      # Tailwind imports only
-└── assets/            # Images, icons, fonts
-```
-
----
-
-## Best Practices
-
-1. **Component Structure**
-   - Keep components small and focused
-   - Use props for customization
-   - Extract repeated patterns into reusable components
-
-2. **CSS Classes**
-   - Use DaisyUI classes first
-   - Add Tailwind utilities for custom styling
-   - Avoid inline styles unless absolutely necessary
-
-3. **State Management**
-   - Use React hooks (useState, useEffect)
-   - Keep state as local as possible
-   - Consider Context API for global state
-
-4. **Performance**
-   - Lazy load images
-   - Code split large components
-   - Memoize expensive computations
-
-5. **Testing**
-   - Test component rendering
-   - Test user interactions
-   - Test responsive behavior
-
----
-
-## Quick Reference
-
-### Most Used Classes
-
-**Colors**
-
-- Blue button: `bg-blue-600 hover:bg-blue-700 text-white`
-- Blue text: `text-blue-600`
-- Gray text: `text-gray-600`, `text-gray-700`, `text-gray-900`
-- Borders: `border-gray-300`, `border-gray-200`
-
-**Layout**
-
-- Container: `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`
-- Flexbox: `flex justify-between items-center gap-4`
-- Grid: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
-
-**Spacing**
-
-- Padding: `p-4`, `p-6`, `p-8`, `px-4 py-3`
-- Margin: `mb-2`, `mb-4`, `mb-8`, `mt-6`
-- Gap: `gap-4`, `gap-6`, `space-y-4`, `space-y-5`
-
-**Typography**
-
-- Heading: `text-4xl font-bold text-blue-600`
-- Body: `text-gray-600`, `text-sm`, `text-base`
-- Label: `text-sm font-medium text-gray-700`
-
-**Components**
-
-- Button: `bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200`
-- Input: `w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition`
-- Card: `bg-white rounded-2xl shadow-xl border border-gray-100 p-6`
-
-**Backgrounds**
-
-- White: `bg-white`
-- Gradient: `bg-gradient-to-br from-blue-50 via-white to-indigo-50`
-- Light: `bg-gray-50`
-
-**Borders & Shadows**
-
-- Border: `border border-gray-100`, `border-t border-gray-200`
-- Shadow: `shadow-sm`, `shadow-xl`
-- Rounded: `rounded-lg`, `rounded-2xl`, `rounded-full`
-
-**Interactive States**
-
-- Hover: `hover:bg-blue-700`, `hover:text-blue-700`
-- Focus: `focus:outline-none focus:ring-2 focus:ring-blue-500`
-- Disabled: `disabled:opacity-50 disabled:cursor-not-allowed`
-- Transition: `transition duration-200`
+If standard UI feels loud or featured UI feels generic — it is wrong.
 
 ---
 
 **Last Updated**: February 2026
 **Maintained by**: Claude Code
-
-## Design Summary
-
-**Color Scheme**: Modern blue theme with clean gradients
-**Primary Color**: Blue 600 (#3b82f6)
-**Framework**: Tailwind CSS with minimal DaisyUI
-**Style**: Clean, sleek, modern with smooth transitions
-**Buttons**: Always blue (`bg-blue-600 hover:bg-blue-700`)
-**Forms**: Consistent input styling with blue focus rings
-**Layout**: White cards on gradient backgrounds for auth, white backgrounds for main app
+**Design Direction Set By**: Product Owner

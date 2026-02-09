@@ -4,13 +4,13 @@ import UserCard from "./UserCard";
 
 const Profile = ({ user }) => {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-12 px-4">
-			<div className="max-w-7xl mx-auto">
-				<div className="text-center mb-8">
-					<h1 className="text-4xl font-bold text-blue-600 mb-2">
+		<div className="min-h-screen bg-[#0B0F14] py-12 px-4">
+			<div className="max-w-6xl mx-auto">
+				<div className="mb-8">
+					<h1 className="text-2xl font-semibold text-gray-200 mb-2">
 						Your Profile
 					</h1>
-					<p className="text-gray-600">
+					<p className="text-sm text-gray-400">
 						Edit your profile and see live preview
 					</p>
 				</div>
@@ -21,8 +21,8 @@ const Profile = ({ user }) => {
 					</div>
 
 					<div className="w-full lg:sticky lg:top-8">
-						<div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
-							<h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
+						<div className="bg-[#121826] border border-white/10 rounded-lg p-8">
+							<h3 className="text-base font-medium text-gray-200 mb-4">
 								Live Preview
 							</h3>
 							<UserCard user={user} />

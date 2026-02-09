@@ -14,12 +14,12 @@ const EditProfile = ({ user }) => {
 	const [skills, setSkills] = useState(user?.skills?.join(", ") || "");
 
 	return (
-		<div className="w-full bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-			<div className="text-center mb-8">
-				<h2 className="text-3xl font-bold text-blue-600 mb-2">
+		<div className="w-full bg-[#121826] border border-white/10 rounded-lg p-8">
+			<div className="mb-8">
+				<h2 className="text-xl font-semibold text-gray-200 mb-2">
 					Edit Profile
 				</h2>
-				<p className="text-gray-600">Update your information</p>
+				<p className="text-sm text-gray-400">Update your information</p>
 			</div>
 
 			<form
@@ -27,10 +27,10 @@ const EditProfile = ({ user }) => {
 					e.preventDefault();
 					alert("sd");
 				}}
-				className="space-y-5">
+				className="space-y-4">
 				<div className="w-full">
 					<label
-						className="block text-sm font-medium text-gray-700 mb-2"
+						className="block text-sm font-medium text-gray-300 mb-2"
 						htmlFor="email">
 						Email
 					</label>
@@ -40,14 +40,14 @@ const EditProfile = ({ user }) => {
 						placeholder="Enter your email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+						className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 						required
 					/>
 				</div>
 
 				<div className="w-full">
 					<label
-						className="block text-sm font-medium text-gray-700 mb-2"
+						className="block text-sm font-medium text-gray-300 mb-2"
 						htmlFor="firstName">
 						First Name
 					</label>
@@ -57,14 +57,14 @@ const EditProfile = ({ user }) => {
 						placeholder="Enter your first name"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+						className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 						required
 					/>
 				</div>
 
 				<div className="w-full">
 					<label
-						className="block text-sm font-medium text-gray-700 mb-2"
+						className="block text-sm font-medium text-gray-300 mb-2"
 						htmlFor="lastName">
 						Last Name
 					</label>
@@ -74,7 +74,7 @@ const EditProfile = ({ user }) => {
 						placeholder="Enter your last name"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+						className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 						required
 					/>
 				</div>
@@ -82,7 +82,7 @@ const EditProfile = ({ user }) => {
 				{user?.age && (
 					<div className="w-full">
 						<label
-							className="block text-sm font-medium text-gray-700 mb-2"
+							className="block text-sm font-medium text-gray-300 mb-2"
 							htmlFor="age">
 							Age
 						</label>
@@ -92,7 +92,7 @@ const EditProfile = ({ user }) => {
 							placeholder="Enter your age"
 							value={age}
 							onChange={(e) => setAge(e.target.value)}
-							className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 							required
 						/>
 					</div>
@@ -101,7 +101,7 @@ const EditProfile = ({ user }) => {
 				{user?.gender && (
 					<div className="w-full">
 						<label
-							className="block text-sm font-medium text-gray-700 mb-2"
+							className="block text-sm font-medium text-gray-300 mb-2"
 							htmlFor="gender">
 							Gender
 						</label>
@@ -111,7 +111,7 @@ const EditProfile = ({ user }) => {
 							placeholder="Enter your gender"
 							value={gender}
 							onChange={(e) => setGender(e.target.value)}
-							className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 							required
 						/>
 					</div>
@@ -120,7 +120,7 @@ const EditProfile = ({ user }) => {
 				{user?.photoUrl && (
 					<div className="w-full">
 						<label
-							className="block text-sm font-medium text-gray-700 mb-2"
+							className="block text-sm font-medium text-gray-300 mb-2"
 							htmlFor="photoUrl">
 							Photo URL
 						</label>
@@ -130,7 +130,7 @@ const EditProfile = ({ user }) => {
 							placeholder="Set your photo URL"
 							value={photoUrl}
 							onChange={(e) => setPhotoUrl(e.target.value)}
-							className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 							required
 						/>
 					</div>
@@ -139,7 +139,7 @@ const EditProfile = ({ user }) => {
 				{user?.about && (
 					<div className="w-full">
 						<label
-							className="block text-sm font-medium text-gray-700 mb-2"
+							className="block text-sm font-medium text-gray-300 mb-2"
 							htmlFor="about">
 							About
 						</label>
@@ -148,7 +148,7 @@ const EditProfile = ({ user }) => {
 							placeholder="Tell us about yourself"
 							value={about}
 							onChange={(e) => setAbout(e.target.value)}
-							className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition resize-none"
 							rows="4"
 							required
 						/>
@@ -158,7 +158,7 @@ const EditProfile = ({ user }) => {
 				{user?.skills && user?.skills.length > 0 && (
 					<div className="w-full">
 						<label
-							className="block text-sm font-medium text-gray-700 mb-2"
+							className="block text-sm font-medium text-gray-300 mb-2"
 							htmlFor="skills">
 							Skills
 						</label>
@@ -168,7 +168,7 @@ const EditProfile = ({ user }) => {
 							placeholder="Enter your skills (comma separated)"
 							value={skills}
 							onChange={(e) => setSkills(e.target.value)}
-							className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
 							required
 						/>
 					</div>
@@ -177,7 +177,7 @@ const EditProfile = ({ user }) => {
 				<button
 					type="submit"
 					disabled={isLoading}
-					className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+					className="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-8">
 					{isLoading ? (
 						<>
 							<span className="loading loading-spinner loading-sm"></span>
@@ -187,7 +187,7 @@ const EditProfile = ({ user }) => {
 						"Update Profile"
 					)}
 				</button>
-				{error && <p className="text-red-500 mt-2">{error}</p>}
+				{error && <p className="text-red-400 text-sm mt-2">{error}</p>}
 			</form>
 		</div>
 	);
