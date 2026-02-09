@@ -6,10 +6,10 @@ const Footer = () => {
 					{/* Left Section - Copyright */}
 					<div className="flex items-center gap-3">
 						<div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-							<span className="text-white font-bold text-lg">D</span>
+							<span className="text-white font-bold text-lg">M</span>
 						</div>
 						<p className="text-sm text-gray-600">
-							© {new Date().getFullYear()} Dev-Tinder. All rights reserved.
+							© {new Date().getFullYear()} Merge. All rights reserved.
 						</p>
 					</div>
 

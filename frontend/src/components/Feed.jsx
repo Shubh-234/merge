@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../store/slice/feedSlice";
+import UserCard from "./UserCard";
 
 const Feed = () => {
 	const dispatch = useDispatch();
 	const feedData = useSelector((store) => store.feed);
+	const user = useSelector((store) => store.user);
 	const getFeed = async () => {
 		if (feedData) {
 			return null;
@@ -29,17 +31,14 @@ const Feed = () => {
 	useEffect(() => {
 		getFeed();
 	}, []);
-	return (
-		<div>
-			{feedData && feedData.length > 0 && (
-				<div className="feed-container">
-					{feedData.map((item) => (
-						<div key={item._id}>{item?.firstName}</div>
-					))}
-				</div>
-			)}
-		</div>
-	);
+
+	if (feedData) {
+		console.log("feed data in feed component", feedData);
+	}
+
+	const userToShow = feedData && feedData.length > 0 ? feedData[0] : null;
+
+	return <UserCard user={userToShow} />;
 };
 
 export default Feed;

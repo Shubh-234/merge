@@ -242,7 +242,7 @@ const getUserFeed = async (req, res) => {
 		const userFeed = await User.find({
 			_id: { $nin: [user?._id, ...notFetchUsers] },
 		})
-			.select("firstName lastName age gender skills")
+			.select("firstName lastName age gender skills about photoUrl")
 			.skip(skip)
 			.limit(limit);
 

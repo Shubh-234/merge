@@ -31,8 +31,10 @@ const Signup = () => {
 			<div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
 				{/* Header */}
 				<div className="text-center mb-8">
-					<h1 className="text-4xl font-bold text-blue-600 mb-2">Dev-Tinder</h1>
-					<p className="text-gray-600">Create your developer profile</p>
+					<h1 className="text-4xl font-bold text-blue-600 mb-2">Merge</h1>
+					<p className="text-gray-600">
+						Where developers merge ideas and skills
+					</p>
 				</div>
 
 				{/* Signup Form */}

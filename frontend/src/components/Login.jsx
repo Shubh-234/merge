@@ -26,7 +26,7 @@ const Login = () => {
 				"http://localhost:7777/api/auth/login",
 				requestOptions,
 			).then((res) => res.json());
-		
+
 			if (response.success && response?.user) {
 				dispatch(addUser(response.user));
 				navigate("/");
@@ -45,8 +45,10 @@ const Login = () => {
 		<div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
 				<div className="text-center mb-8">
-					<h1 className="text-4xl font-bold text-blue-600 mb-2">Dev-Tinder</h1>
-					<p className="text-gray-600">Connect with fellow developers</p>
+					<h1 className="text-4xl font-bold text-blue-600 mb-2">Merge</h1>
+					<p className="text-gray-600">
+						Where developers merge ideas and skills
+					</p>
 				</div>
 
 				<form onSubmit={handleLogin} className="space-y-5">

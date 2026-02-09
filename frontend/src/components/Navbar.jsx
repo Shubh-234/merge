@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../store/slice/userSlice";
 import { useRef } from "react";
 
 const Navbar = () => {
 	const userFromStore = useSelector((store) => store.user);
 	const navigate = useNavigate();
-	const dispatch = useDispatch();	
+	const dispatch = useDispatch();
 	const dropdownRef = useRef(null);
 
 	const handleLogout = async () => {
@@ -18,21 +18,24 @@ const Navbar = () => {
 				headers: { "Content-Type": "application/json" },
 				credentials: "include",
 				body: JSON.stringify({}),
-			}
-			const response = await fetch('http://localhost:7777/api/auth/logout', requestOptions)
-			
+			};
+			const response = await fetch(
+				"http://localhost:7777/api/auth/logout",
+				requestOptions,
+			);
+
 			console.log("Logout response", response);
 			if (response.status === 200) {
 				dispatch(removeUser());
 			} else {
 				console.error("Logout failed with status:", response.status);
 			}
-			navigate('/login')
+			navigate("/login");
 		} catch (error) {
 			console.error("Error during logout:", error);
-			navigate('/login')
+			navigate("/login");
 		}
-	}
+	};
 
 	return (
 		<nav className="bg-white border-b border-gray-200 shadow-sm">
@@ -40,8 +43,10 @@ const Navbar = () => {
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
 					<div className="flex-shrink-0">
-						<a href="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition">
-							Dev-Tinder
+						<a
+							href="/"
+							className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition">
+							Merge
 						</a>
 					</div>
 
@@ -56,32 +61,37 @@ const Navbar = () => {
 
 						{/* User Menu */}
 						<div className="dropdown dropdown-end">
-							{userFromStore && userFromStore?.photoUrl && <div
-								tabIndex={0}
-								role="button"
-								ref={dropdownRef}
-								className="btn btn-ghost btn-circle avatar hover:bg-blue-50">
-								<div className="w-10 rounded-full ring-2 ring-blue-500">
-									<img
-										alt="profile-img"
-										src={userFromStore.photoUrl}
-									/>
+							{userFromStore && userFromStore?.photoUrl && (
+								<div
+									tabIndex={0}
+									role="button"
+									ref={dropdownRef}
+									className="btn btn-ghost btn-circle avatar hover:bg-blue-50">
+									<div className="w-10 rounded-full ring-2 ring-blue-500">
+										<img alt="profile-img" src={userFromStore.photoUrl} />
+									</div>
 								</div>
-							</div>}
+							)}
 							<ul
 								tabIndex={0}
 								className="menu dropdown-content bg-white rounded-lg shadow-lg border border-gray-200 mt-3 w-52 p-2 z-10">
 								<li>
 									<a className="hover:bg-blue-50 rounded-lg">
 										<span>Profile</span>
-										<span className="badge badge-sm bg-blue-600 text-white border-0">New</span>
+										<span className="badge badge-sm bg-blue-600 text-white border-0">
+											New
+										</span>
 									</a>
 								</li>
 								<li>
 									<a className="hover:bg-blue-50 rounded-lg">Settings</a>
 								</li>
 								<li>
-									<a onClick={ handleLogout } className="hover:bg-red-50 text-red-600 rounded-lg">Logout</a>
+									<a
+										onClick={handleLogout}
+										className="hover:bg-red-50 text-red-600 rounded-lg">
+										Logout
+									</a>
 								</li>
 							</ul>
 						</div>
