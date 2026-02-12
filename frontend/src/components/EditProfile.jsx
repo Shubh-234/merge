@@ -2,6 +2,7 @@ import { useState } from "react";
 import UserCard from "./UserCard";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/slice/userSlice";
+import Toast from "./Toast";
 
 const EditProfile = ({ user }) => {
 	const [email, setEmail] = useState(user?.email || "");
@@ -14,6 +15,7 @@ const EditProfile = ({ user }) => {
 	const [photoUrl, setPhotoUrl] = useState(user?.photoUrl || "");
 	const [about, setAbout] = useState(user?.about || "");
 	const [skills, setSkills] = useState(user?.skills?.join(", ") || "");
+	const [showToast, setShowToast] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -49,6 +51,7 @@ const EditProfile = ({ user }) => {
 			}
 			const updatedUser = await response.json();
 			dispatch(addUser(updatedUser?.updatedUser));
+			setShowToast(true);
 		} catch (error) {
 			console.error("Update error:", error);
 			setIsLoading(false);
@@ -57,6 +60,17 @@ const EditProfile = ({ user }) => {
 			setIsLoading(false);
 		}
 	};
+
+	const genderList = [
+		{
+			displayText: "Male",
+			value: "male",
+		},
+		{
+			displayText: "Female",
+			value: "female",
+		},
+	];
 
 	return (
 		<>
@@ -146,15 +160,18 @@ const EditProfile = ({ user }) => {
 							htmlFor="gender">
 							Gender
 						</label>
-						<input
-							type="text"
+						<select
 							id="gender"
-							placeholder="Enter your gender"
 							value={gender}
 							onChange={(e) => setGender(e.target.value)}
 							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
-							required
-						/>
+							required>
+							{genderList.map((genderOption) => (
+								<option key={genderOption.value} value={genderOption.value}>
+									{genderOption.displayText}
+								</option>
+							))}
+						</select>
 					</div>
 
 					{user?.photoUrl && (
@@ -240,6 +257,15 @@ const EditProfile = ({ user }) => {
 					<UserCard user={previewUser} />
 				</div>
 			</div>
+
+			{/* Success Toast */}
+			{showToast && (
+				<Toast
+					message="Profile updated successfully"
+					onClose={() => setShowToast(false)}
+					duration={3000}
+				/>
+			)}
 		</>
 	);
 };
