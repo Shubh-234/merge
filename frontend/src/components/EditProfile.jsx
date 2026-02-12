@@ -25,7 +25,7 @@ const EditProfile = ({ user }) => {
 		gender,
 		photoUrl,
 		about,
-		userSkills: skills.split(",").map((skill) => skill.trim()),
+		skills: skills.split(",").map((skill) => skill.trim()),
 		_id: user?._id,
 	};
 
@@ -48,7 +48,7 @@ const EditProfile = ({ user }) => {
 				throw new Error("Failed to update user");
 			}
 			const updatedUser = await response.json();
-			dispatch(addUser(updatedUser));
+			dispatch(addUser(updatedUser?.updatedUser));
 		} catch (error) {
 			console.error("Update error:", error);
 			setIsLoading(false);
@@ -69,12 +69,7 @@ const EditProfile = ({ user }) => {
 					<p className="text-sm text-gray-400">Update your information</p>
 				</div>
 
-				<form
-					onSubmit={(e) => {
-						e.preventDefault();
-						alert("sd");
-					}}
-					className="space-y-4">
+				<form onSubmit={handleUpdate} className="space-y-4">
 					<div className="w-full">
 						<label
 							className="block text-sm font-medium text-gray-300 mb-2"
@@ -145,24 +140,22 @@ const EditProfile = ({ user }) => {
 						</div>
 					)}
 
-					{user?.gender && (
-						<div className="w-full">
-							<label
-								className="block text-sm font-medium text-gray-300 mb-2"
-								htmlFor="gender">
-								Gender
-							</label>
-							<input
-								type="text"
-								id="gender"
-								placeholder="Enter your gender"
-								value={gender}
-								onChange={(e) => setGender(e.target.value)}
-								className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
-								required
-							/>
-						</div>
-					)}
+					<div className="w-full">
+						<label
+							className="block text-sm font-medium text-gray-300 mb-2"
+							htmlFor="gender">
+							Gender
+						</label>
+						<input
+							type="text"
+							id="gender"
+							placeholder="Enter your gender"
+							value={gender}
+							onChange={(e) => setGender(e.target.value)}
+							className="w-full bg-transparent border border-white/10 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:border-indigo-500 transition"
+							required
+						/>
+					</div>
 
 					{user?.photoUrl && (
 						<div className="w-full">
@@ -224,7 +217,6 @@ const EditProfile = ({ user }) => {
 					<button
 						type="submit"
 						disabled={isLoading}
-						onClick={handleUpdate}
 						className="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-8">
 						{isLoading ? (
 							<>
