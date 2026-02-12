@@ -1,0 +1,193 @@
+{
+  "users": [
+    {
+      "id": "698d60e237d04a160877816b",
+      "email": "sarah.chen@example.com",
+      "password": "Password123!",
+      "firstName": "Sarah",
+      "lastName": "Chen",
+      "skills": [
+        "React.js",
+        "Node.js",
+        "TypeScript",
+        "MongoDB"
+      ]
+    },
+    {
+      "id": "698d60e337d04a160877816d",
+      "email": "marcus.j@example.com",
+      "password": "Password123!",
+      "firstName": "Marcus",
+      "lastName": "Johnson",
+      "skills": [
+        "Python",
+        "Django",
+        "PostgreSQL",
+        "Docker"
+      ]
+    },
+    {
+      "id": "698d60e337d04a160877816f",
+      "email": "priya.sharma@example.com",
+      "password": "Password123!",
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "skills": [
+        "Vue.js",
+        "Express.js",
+        "AWS",
+        "Redis"
+      ]
+    },
+    {
+      "id": "698d60e437d04a1608778171",
+      "email": "alex.rod@example.com",
+      "password": "Password123!",
+      "firstName": "Alex",
+      "lastName": "Rodriguez",
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "Kubernetes",
+        "MySQL"
+      ]
+    },
+    {
+      "id": "698d60e537d04a1608778173",
+      "email": "emily.w@example.com",
+      "password": "Password123!",
+      "firstName": "Emily",
+      "lastName": "Watson",
+      "skills": [
+        "React Native",
+        "JavaScript",
+        "Firebase",
+        "GraphQL"
+      ]
+    },
+    {
+      "id": "698d60e537d04a1608778175",
+      "email": "david.kim@example.com",
+      "password": "Password123!",
+      "firstName": "David",
+      "lastName": "Kim",
+      "skills": [
+        "Go",
+        "Rust",
+        "Kafka",
+        "Elasticsearch"
+      ]
+    },
+    {
+      "id": "698d60e637d04a1608778177",
+      "email": "nina.patel@example.com",
+      "password": "Password123!",
+      "firstName": "Nina",
+      "lastName": "Patel",
+      "skills": [
+        "Angular",
+        "C#",
+        ".NET Core",
+        "Azure"
+      ]
+    },
+    {
+      "id": "698d60e737d04a1608778179",
+      "email": "jake.m@example.com",
+      "password": "Password123!",
+      "firstName": "Jake",
+      "lastName": "Morrison",
+      "skills": [
+        "PHP",
+        "Laravel",
+        "Vue.js",
+        "MySQL"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "Sarah Chen",
+      "to": "Marcus Johnson",
+      "status": "interested",
+      "note": "Sarah → Marcus (interested)"
+    },
+    {
+      "from": "Sarah Chen",
+      "to": "Priya Sharma",
+      "status": "interested",
+      "note": "Sarah → Priya (interested)"
+    },
+    {
+      "from": "Sarah Chen",
+      "to": "Alex Rodriguez",
+      "status": "interested",
+      "note": "Sarah → Alex (interested)"
+    },
+    {
+      "from": "Marcus Johnson",
+      "to": "Emily Watson",
+      "status": "ignored",
+      "note": "Marcus → Emily (ignored)"
+    },
+    {
+      "from": "Priya Sharma",
+      "to": "David Kim",
+      "status": "interested",
+      "note": "Priya → David (interested)"
+    },
+    {
+      "from": "Priya Sharma",
+      "to": "Nina Patel",
+      "status": "interested",
+      "note": "Priya → Nina (interested)"
+    },
+    {
+      "from": "Alex Rodriguez",
+      "to": "Emily Watson",
+      "status": "interested",
+      "note": "Alex → Emily (interested)"
+    },
+    {
+      "from": "Alex Rodriguez",
+      "to": "Jake Morrison",
+      "status": "interested",
+      "note": "Alex → Jake (interested)"
+    },
+    {
+      "from": "Emily Watson",
+      "to": "Jake Morrison",
+      "status": "interested",
+      "note": "Emily → Jake (interested)"
+    },
+    {
+      "from": "David Kim",
+      "to": "Nina Patel",
+      "status": "ignored",
+      "note": "David → Nina (ignored)"
+    },
+    {
+      "from": "Nina Patel",
+      "to": "Jake Morrison",
+      "status": "interested",
+      "note": "Nina → Jake (interested)"
+    },
+    {
+      "from": "Jake Morrison",
+      "to": "Sarah Chen",
+      "status": "interested",
+      "note": "Jake → Sarah (interested)"
+    }
+  ],
+  "summary": {
+    "totalUsers": 8,
+    "totalConnectionRequests": 12,
+    "interestedRequests": 10,
+    "ignoredRequests": 2
+  },
+  "testingInfo": {
+    "baseUrl": "http://localhost:7777/api",
+    "commonPassword": "Password123!",
+    "note": "Use these credentials to login and test the application manually"
+  }
+}
