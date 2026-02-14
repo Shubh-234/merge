@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slice/userSlice";
 import feedReducer from "./slice/feedSlice";
 import connectionReducer from "./slice/connectionsSlice";
+import requestsReducer from "./slice/requestsSlice";
 
 const loadState = () => {
 	try {
@@ -19,6 +20,7 @@ const store = configureStore({
 		user: userReducer,
 		feed: feedReducer,
 		connections: connectionReducer,
+		requests: requestsReducer,
 	},
 	preloadedState: loadState(),
 });
