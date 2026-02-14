@@ -46,8 +46,12 @@ const Feed = () => {
 
 			<main className="relative max-w-6xl mx-auto px-4 py-12">
 				<div className="mb-12 text-center space-y-3">
-					<h1 className="text-2xl font-semibold text-gray-200 tracking-tight">Discover Developers</h1>
-					<p className="text-sm text-gray-500">Connect with talented developers in your network</p>
+					<h1 className="text-2xl font-semibold text-gray-200 tracking-tight">
+						Discover Developers
+					</h1>
+					<p className="text-sm text-gray-500">
+						Connect with talented developers in your network
+					</p>
 				</div>
 
 				<UserCard user={userToShow} />

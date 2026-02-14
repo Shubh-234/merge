@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import { Provider, useSelector } from "react-redux";
 import Profile from "./components/Profile";
 import Feed from "./components/Feed";
+import Connnections from "./components/Connnections";
 
 function App() {
 	const user = useSelector((store) => store.user);
@@ -19,6 +20,7 @@ function App() {
 							<Route path="/login" element={<Login />} />
 							<Route path="/signup" element={<Signup />} />
 							<Route path="/profile" element={<Profile />} />
+							<Route path="/connections" element={<Connnections />} />
 							<Route path="/about" element={<div>About Page</div>} />
 						</Route>
 					</Routes>
