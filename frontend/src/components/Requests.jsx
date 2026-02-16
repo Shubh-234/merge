@@ -342,7 +342,7 @@ const RequestCard = ({ request, onAccept, onIgnore }) => {
 											d="M6 18L18 6M6 6l12 12"
 										/>
 									</svg>
-									Ignore
+									Reject
 								</span>
 								<div className="absolute inset-0 bg-red-500/0 group-hover/btn:bg-red-500/10 transition-colors duration-300"></div>
 							</button>

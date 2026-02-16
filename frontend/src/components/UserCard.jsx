@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../store/slice/feedSlice";
 
 const UserCard = ({ user }) => {
+	console.log("user in user card", user);
+	const dispatch = useDispatch();
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	if (!user) {
 		return (
 			<div className="flex items-center justify-center min-h-[600px]">
@@ -30,12 +36,30 @@ const UserCard = ({ user }) => {
 		);
 	}
 
-	const handleIgnore = () => {
-		console.log("Ignored:", user);
-	};
-
-	const handleInterested = () => {
-		console.log("Interested in:", user);
+	const sendConnectionRequest = async (type, user) => {
+		try {
+			const requestOptions = {
+				method: "POST",
+				credentials: "include",
+				headers: { "Content-Type": "application/json" },
+			};
+			const response = await fetch(
+				`http://localhost:7777/api/request/send/${type}/${user?._id}`,
+				requestOptions,
+			);
+			const responseData = await response.json();
+			if (responseData?.success === true) {
+				dispatch(removeUserFromFeed(user._id));
+			} else {
+				setError(responseData?.message);
+			}
+		} catch (error) {
+			console.error("Error while sending connection requests", error);
+			setError(error?.message);
+			if (isLoading) {
+				setIsLoading(false);
+			}
+		}
 	};
 
 	return (
@@ -105,7 +129,10 @@ const UserCard = ({ user }) => {
 
 						<div className="flex gap-3 pt-6">
 							<button
-								onClick={handleIgnore}
+								onClick={(e) => {
+									e.preventDefault();
+									sendConnectionRequest("ignored", user);
+								}}
 								className="flex-1 relative group/btn overflow-hidden border border-white/10 hover:border-white/20 text-gray-300 hover:text-white text-sm font-medium px-6 py-3.5 rounded-xl transition-all duration-300">
 								<span className="relative z-10 flex items-center justify-center gap-2">
 									<svg
@@ -126,7 +153,10 @@ const UserCard = ({ user }) => {
 							</button>
 
 							<button
-								onClick={handleInterested}
+								onClick={(e) => {
+									e.preventDefault();
+									sendConnectionRequest("interested", user);
+								}}
 								className="flex-1 relative group/btn overflow-hidden bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-600 text-white text-sm font-medium px-6 py-3.5 rounded-xl shadow-lg shadow-indigo-900/50 hover:shadow-indigo-900/70 transition-all duration-300">
 								<span className="relative z-10 flex items-center justify-center gap-2">
 									<svg
