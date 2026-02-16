@@ -254,7 +254,7 @@ const EditProfile = ({ user }) => {
 					<h3 className="text-base font-medium text-gray-200 mb-4">
 						Live Preview
 					</h3>
-					<UserCard user={previewUser} />
+					<UserCard user={previewUser} inFeed={false} />
 				</div>
 			</div>
 

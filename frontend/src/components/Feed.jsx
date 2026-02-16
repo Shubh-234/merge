@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../store/slice/feedSlice";
 import UserCard from "./UserCard";
@@ -6,12 +6,18 @@ import UserCard from "./UserCard";
 const Feed = () => {
 	const dispatch = useDispatch();
 	const feedData = useSelector((store) => store.feed);
-	const user = useSelector((store) => store.user);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+
 	const getFeed = async () => {
 		if (feedData) {
-			return null;
+			return;
 		}
+
 		try {
+			setLoading(true);
+			setError("");
+
 			const requestOptions = {
 				method: "GET",
 				headers: { "Content-Type": "application/json" },
@@ -21,20 +27,31 @@ const Feed = () => {
 				"http://localhost:7777/api/users/feed",
 				requestOptions,
 			);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
 			const data = await response.json();
-			dispatch(addFeed(data?.data));
+
+			if (data?.success) {
+				dispatch(addFeed(data?.data || []));
+			} else {
+				setError(data?.message || "Failed to load feed");
+			}
 		} catch (error) {
 			console.error("Error fetching feed:", error);
+			setError(
+				error?.message || "Failed to load feed. Please try again later.",
+			);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	useEffect(() => {
 		getFeed();
 	}, []);
-
-	if (feedData) {
-		console.log("feed data in feed component", feedData);
-	}
 
 	const userToShow = feedData && feedData.length > 0 ? feedData[0] : null;
 
@@ -54,7 +71,49 @@ const Feed = () => {
 					</p>
 				</div>
 
-				<UserCard user={userToShow} />
+				{/* Loading State */}
+				{loading && (
+					<div className="flex items-center justify-center min-h-[600px]">
+						<div className="text-center space-y-4">
+							<div className="w-12 h-12 mx-auto border-2 border-indigo-600/30 border-t-indigo-600 rounded-full animate-spin"></div>
+							<p className="text-sm text-gray-400">Loading developers...</p>
+						</div>
+					</div>
+				)}
+
+				{/* Error State */}
+				{error && !loading && (
+					<div className="flex items-center justify-center min-h-[600px]">
+						<div className="text-center space-y-3">
+							<div className="w-16 h-16 mx-auto bg-red-500/10 rounded-full flex items-center justify-center">
+								<svg
+									className="w-8 h-8 text-red-400"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={1.5}
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+									/>
+								</svg>
+							</div>
+							<h2 className="text-lg font-medium text-gray-300">
+								Failed to load feed
+							</h2>
+							<p className="text-sm text-red-400">{error}</p>
+							<button
+								onClick={getFeed}
+								className="mt-4 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-md transition">
+								Try Again
+							</button>
+						</div>
+					</div>
+				)}
+
+				{/* Feed Content */}
+				{!loading && !error && <UserCard user={userToShow} inFeed={true} />}
 			</main>
 		</div>
 	);

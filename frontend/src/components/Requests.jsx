@@ -28,7 +28,6 @@ const Requests = () => {
 			}
 
 			const responseData = await response.json();
-			console.log("request response data", responseData);
 
 			if (responseData?.success === true) {
 				dispatch(addRequests(responseData?.data));

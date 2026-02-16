@@ -45,18 +45,9 @@ const Connnections = () => {
 
 	useEffect(() => {
 		if (!connections) {
-			console.log("fetching connections");
 			fetchConnections();
 		}
 	}, []);
-
-	if (!connections) {
-		return null;
-	}
-
-	if (connections.length === 0) {
-		return <div>No Connections found</div>;
-	}
 
 	return (
 		<div className="min-h-screen bg-[#0B0F14] relative overflow-hidden">
@@ -118,7 +109,7 @@ const Connnections = () => {
 				)}
 
 				{/* Empty State */}
-				{!loading && !error && connections.length === 0 && (
+				{!loading && !error && (!connections || connections.length === 0) && (
 					<div className="flex items-center justify-center min-h-[400px]">
 						<div className="text-center space-y-3">
 							<div className="w-16 h-16 mx-auto bg-white/5 rounded-full flex items-center justify-center">
@@ -146,7 +137,7 @@ const Connnections = () => {
 				)}
 
 				{/* Connections List */}
-				{!loading && !error && connections.length > 0 && (
+				{!loading && !error && connections && connections.length > 0 && (
 					<div className="max-w-3xl mx-auto space-y-4">
 						{connections.map((connection) => (
 							<ConnectionCard key={connection?._id} connection={connection} />

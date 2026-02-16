@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { addUser } from "../store/slice/userSlice";
 
 const Login = () => {
@@ -14,6 +14,8 @@ const Login = () => {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+		setError("");
+
 		try {
 			setIsLoading(true);
 			const requestOptions = {
@@ -25,18 +27,25 @@ const Login = () => {
 			const response = await fetch(
 				"http://localhost:7777/api/auth/login",
 				requestOptions,
-			).then((res) => res.json());
+			);
 
-			if (response.success && response?.user) {
-				dispatch(addUser(response.user));
+			const data = await response.json();
+
+			if (data?.success && data?.user) {
+				dispatch(addUser(data.user));
 				navigate("/");
-			} else if (response.success === false) {
-				setError(response.message || "Login failed.");
-				setIsLoading(false);
+			} else {
+				setError(
+					data?.message || "Login failed. Please check your credentials.",
+				);
 			}
 		} catch (error) {
 			console.error("Login error:", error);
-			setError("An error occurred during login. Please try again.");
+			setError(
+				error?.message ||
+					"Network error. Please check your connection and try again.",
+			);
+		} finally {
 			setIsLoading(false);
 		}
 	};
@@ -112,9 +121,11 @@ const Login = () => {
 				<div className="mt-8 pt-8 border-t border-white/10">
 					<p className="text-sm text-gray-400 text-center">
 						Don't have an account?{" "}
-						<a href="#" className="text-gray-300 hover:text-white transition">
+						<Link
+							to="/signup"
+							className="text-gray-300 hover:text-white transition">
 							Sign up
-						</a>
+						</Link>
 					</p>
 				</div>
 			</div>

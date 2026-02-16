@@ -23,7 +23,6 @@ const Body = () => {
 				headers: { "Content-Type": "application/json" },
 				credentials: "include",
 			});
-			console.log("Response from profile api", response);
 			if (response?.status === 401) {
 				navigate("/login");
 				return;

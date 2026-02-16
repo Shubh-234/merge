@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -6,24 +7,48 @@ const Signup = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
+	const [error, setError] = useState("");
+	const [success, setSuccess] = useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const requestOptions = {
-			method: "POST",
-			body: JSON.stringify({ firstName, lastName, email, password }),
-			headers: { "Content-Type": "application/json" },
-			credentials: "include",
-		};
+		setError("");
+		setSuccess("");
 
-		const response = await fetch(
-			"http://localhost:7777/api/auth/signup",
-			requestOptions,
-		);
-		const data = await response.json();
-		console.log("response", data);
-		setIsLoading(false);
-		alert(data.message);
+		try {
+			setIsLoading(true);
+			const requestOptions = {
+				method: "POST",
+				body: JSON.stringify({ firstName, lastName, email, password }),
+				headers: { "Content-Type": "application/json" },
+				credentials: "include",
+			};
+
+			const response = await fetch(
+				"http://localhost:7777/api/auth/signup",
+				requestOptions,
+			);
+
+			const data = await response.json();
+
+			if (data?.success) {
+				setSuccess(data?.message || "Account created successfully!");
+				setTimeout(() => {
+					navigate("/login");
+				}, 2000);
+			} else {
+				setError(data?.message || "Signup failed. Please try again.");
+			}
+		} catch (error) {
+			console.error("Signup error:", error);
+			setError(
+				error?.message ||
+					"Network error. Please check your connection and try again.",
+			);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -107,6 +132,18 @@ const Signup = () => {
 						/>
 					</div>
 
+					{error && (
+						<div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+							<p className="text-sm text-red-400">{error}</p>
+						</div>
+					)}
+
+					{success && (
+						<div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+							<p className="text-sm text-green-400">{success}</p>
+						</div>
+					)}
+
 					<button
 						type="submit"
 						disabled={isLoading}
@@ -125,11 +162,11 @@ const Signup = () => {
 				<div className="mt-8 pt-8 border-t border-white/10">
 					<p className="text-sm text-gray-400 text-center">
 						Already have an account?{" "}
-						<a
-							href="#"
+						<Link
+							to="/login"
 							className="text-gray-300 hover:text-white transition">
 							Login
-						</a>
+						</Link>
 					</p>
 				</div>
 			</div>
